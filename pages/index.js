@@ -36,7 +36,7 @@ export default function Home() {
         loadingMsg.current.textContent = ""
 
         data.list.forEach(image => {
-          const element = `<img src=${image.url}></img>`
+          const element = `<img class="images" src=${image.url}></img>`
           Images.current.innerHTML += element
         })
    
@@ -70,6 +70,7 @@ export default function Home() {
 				id="num"
 				min={1}
 				max={10}
+				defaultValue={1}
 			/>
 			<br />
 			<br />
