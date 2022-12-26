@@ -17,7 +17,7 @@ export default function Home() {
     if (description && num <= 10 && num >= 1){
       Images.current.innerHTML = ""
       loadingMsg.current.textContent = "Processing..."
-      loadingMsg.current.style.color = "black"
+      loadingMsg.current.style.color = "white"
 
       const jsonObject = {
         prompt: description,
