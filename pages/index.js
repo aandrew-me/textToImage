@@ -9,7 +9,14 @@ export default function Home() {
 	const generate = () => {
 		const description = descriptionBtn.current.value;
 		const num = Number(numField.current.value);
+		const customModel = getId("customModel").value;
+		let model = getId("modelSelect").value;
+		if (customModel.length > 0 && model == "custom") {
+			console.log("Custom model selected");
+			model = customModel;
+		}
 		console.log("Num is " + num);
+		console.log("Model:", model);
 
 		if (description && num <= 10 && num >= 1) {
 			Images.current.innerHTML = "";
@@ -20,6 +27,7 @@ export default function Home() {
 				prompt: description,
 				n: num,
 				size: "512x512",
+				model,
 			};
 
 			fetch("/api/image", {
@@ -54,7 +62,7 @@ export default function Home() {
 		<div>
 			<h1>Text to image generator</h1>
 			<div id="box">
-				<p>Describe your image</p>
+				<label htmlFor="description">Prompt</label>
 				<input
 					ref={descriptionBtn}
 					type="text"
@@ -65,6 +73,39 @@ export default function Home() {
 							generate();
 						}
 					}}
+				/>
+
+				<br />
+				<br />
+				<label>Image Model</label>
+				<select
+					id="modelSelect"
+					onChange={() => {
+						let model = getId("modelSelect").value;
+						if (model == "custom") {
+							getId("customModel").style.display = "inline";
+						} else {
+							getId("customModel").style.display = "none";
+						}
+					}}
+				>
+					<option value="dalle">DALL.E</option>
+					<option value="midjourney">Midjourney</option>
+					<option value="realistic-vision-v13">
+						Realistic Vision V13
+					</option>
+					<option value="anything-v4">Anything V4</option>
+					<option value="synthwave-diffusion">
+						Synthwave Diffusion
+					</option>
+					<option value="custom">
+						Custom Stable Diffusion model
+					</option>
+				</select>
+				<input
+					type="text"
+					id="customModel"
+					placeholder="Custom Model ID"
 				/>
 				<br />
 				<br />
@@ -90,4 +131,8 @@ export default function Home() {
 			<div ref={Images}></div>
 		</div>
 	);
+}
+
+function getId(id) {
+	return document.getElementById(id);
 }

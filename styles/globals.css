@@ -12,30 +12,27 @@ body{
   display:inline-block;
   border-radius: 10px;
   padding:40px 20px;
+  margin:20px 0 30px 0;
 }
 
 #description{
   padding:15px;
-  margin:15px;
+  margin:10px;
   border:none;
   border-radius: 10px;
   outline: none;
-  width:75%;
-}
-h1{
-  padding:20px;
+  width:80%;
 }
 
-p{
-  font-weight: bold;
-  font-size: large;
-}
+
 
 #num{
   width:50px;
-  padding:10px;
+  padding: 15px;
   border-radius: 5px;
   outline:none;
+  border:none;
+  margin:5px;
 
 }
 
@@ -62,4 +59,22 @@ p{
 }
 @media screen and (max-width:650px) {
   .images{width:90%}
+}
+
+#modelSelect, #customModel{
+  padding:15px;
+  font-size: large;
+  margin:15px;
+  border:none;
+  background-color: rgb(45, 114, 205);
+  color:white;
+  border-radius: 5px;
+  outline: none;
+}
+
+#customModel{
+  display:none;
+}
+#customModel::placeholder{
+  color:rgb(196, 194, 194);
 }
