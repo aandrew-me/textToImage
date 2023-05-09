@@ -30,7 +30,7 @@ export default function Home() {
 				model,
 			};
 
-			fetch("/api/image", {
+			fetch("https://cnotes.alwaysdata.net/image", {
 				method: "POST",
 				body: JSON.stringify(jsonObject),
 				headers: {
@@ -41,7 +41,7 @@ export default function Home() {
 					.json()
 					.then((data) => {
 						console.log(data);
-						if (data.status === true) {
+						if (data.status === "true") {
 							loadingMsg.current.textContent = "";
 
 							data.list.forEach((image) => {
