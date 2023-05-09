@@ -37,20 +37,25 @@ export default function Home() {
 					"Content-type": "application/json; charset=UTF-8",
 				},
 			}).then((res) =>
-				res.json().then((data) => {
-					console.log(data);
-					if (data.status === true) {
-						loadingMsg.current.textContent = "";
+				res
+					.json()
+					.then((data) => {
+						console.log(data);
+						if (data.status === true) {
+							loadingMsg.current.textContent = "";
 
-						data.list.forEach((image) => {
-							const element = `<img class="images" src=${image.url}></img>`;
-							Images.current.innerHTML += element;
-						});
-					} else {
-						loadingMsg.current.textContent = data.message;
-						loadingMsg.current.style.color = "Red";
-					}
-				})
+							data.list.forEach((image) => {
+								const element = `<img class="images" src=${image.url}></img>`;
+								Images.current.innerHTML += element;
+							});
+						} else {
+							loadingMsg.current.textContent = data.message;
+							loadingMsg.current.style.color = "Red";
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+					})
 			);
 		} else {
 			loadingMsg.current.textContent = "Use correct values";
