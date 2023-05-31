@@ -19,7 +19,7 @@ export default function Home() {
 		console.log("Num is " + num);
 		console.log("Model:", model);
 
-		if (description && num <= 10 && num >= 1) {
+		if (description && num <= 4 && num >= 1) {
 			Images.current.innerHTML = "";
 			loadingMsg.current.textContent = "Processing...";
 			loadingMsg.current.style.color = "white";
@@ -130,7 +130,7 @@ export default function Home() {
 				/>
 				<br />
 				<br />
-				<span>Number of images to generate (Max 10) </span>
+				<span>Number of images to generate (Max 4) </span>
 				<input
 					ref={numField}
 					type="number"
