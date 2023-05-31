@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRef } from "react";
 
 export default function Home() {
@@ -41,15 +42,30 @@ export default function Home() {
 					.json()
 					.then((data) => {
 						console.log(data);
-						if (data.status === "true" && data.list != null) {
-							loadingMsg.current.textContent = "";
+						if (data.status === "true" || data.status === true) {
+							if (data.data.status === "processing") {
+								loadingMsg.current.textContent =
+									data.data.message ||
+									"Some error has occured. Try again";
+								loadingMsg.current.style.color = "Red";
+							} else if (data.data.status === "error") {
+								loadingMsg.current.textContent =
+									"Some error has occured. Please try again";
+								loadingMsg.current.style.color = "Red";
+							} else {
+								loadingMsg.current.textContent = "";
 
-							data.list.forEach((image) => {
-								const element = `<img class="images" src=${image.url}></img>`;
-								Images.current.innerHTML += element;
-							});
+								data.data.output.forEach((image) => {
+									const element = `<img class="images" src=${
+										image.url || image
+									}></img>`;
+									Images.current.innerHTML += element;
+								});
+							}
 						} else {
-							loadingMsg.current.textContent = data.message || "Some error has occured";
+							loadingMsg.current.textContent =
+								data.data.message ||
+								"Some error has occured. Try again";
 							loadingMsg.current.style.color = "Red";
 						}
 					})
