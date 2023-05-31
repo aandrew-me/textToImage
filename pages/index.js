@@ -41,7 +41,7 @@ export default function Home() {
 					.json()
 					.then((data) => {
 						console.log(data);
-						if (data.status === "true") {
+						if (data.status === "true" && data.list != null) {
 							loadingMsg.current.textContent = "";
 
 							data.list.forEach((image) => {
@@ -49,7 +49,7 @@ export default function Home() {
 								Images.current.innerHTML += element;
 							});
 						} else {
-							loadingMsg.current.textContent = data.message;
+							loadingMsg.current.textContent = data.message || "Some error has occured";
 							loadingMsg.current.style.color = "Red";
 						}
 					})
